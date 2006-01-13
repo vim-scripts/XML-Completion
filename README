@@ -1,0 +1,25 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1442
+
+Context sensitive completion for XML.
+Completes:
+ * element names
+ * attribute names (rejects already presented attributes)
+ * attribute values (if defined as enumeration)
+ * closing tag names
+ * keywords in XML declaration
+
+1. Invoking
+
+The completion function is XmlComplete() and is imapped on \C-J.
+
+2. Completion in elements
+
+Distribution contains definition files (recipes) for DocBook 4.[234], XSL FO 1.0, XSLT 1.0, Relax NG 1.0, XML Schemas 1.0, SVG 1.1, XHTML 1.1, XInclude 1.0 and OpenOffice 1.0 XML format.
+
+If g:xmlSubelements == "yes" (default "no"), completion of element names is restricted on subelements of parent element. This feature is new and momentarily works only for DocBook, XSLT and XML Schemas (the recipes must be modified).
+
+Completion algorithm:
+1. If name of currently opened tag is prefixed, looks for respective xmlns mapping for its URN. If mapping exists, selects recipe associated with this URN.
+2. If name isn't prefixed, looks for implicit NS. If exists, ... (see above).
+3. Looks for Doctype decl. If found, tries first PUBLIC, then SYSTEM ident.
+4. If all fails, fires \C-N for normal completion.
